@@ -46,12 +46,12 @@
 {% block main-content %}
 <!-- 1st Product Slider -->
 <div class="m-3">
- <h2>TopWare</h2>
+ <h2>TopWares</h2>
  <!-- Slider 1 -->
 
  <div class="owl-carousel" id="slider1">
   {%for t in TopWear %}
-  <a href="{% url 'product-detail' %}" class="btn"><div class="item"><img src="{{t.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{t.title}}</span><br><span class="fs-5">{{t.selling_price}}</span></div></a>
+  <a href="{% url 'product-detail' t.id %}" class="btn"><div class="item"><img src="{{t.product_image.url }}" alt="" height="350px"><span class="fw-bold">{{t.title}}</span><br><span class="fs-5">{{t.selling_price }} ID:{{t.id}}</span></div></a>
   {% endfor %}
  </div>
 </div>
@@ -96,24 +96,53 @@
 <!-- End Payment Info Section -->
 
 <!-- 2nd Product Slider -->
-<div class="mx-3">
- <h2>Trending Deals</h2>
- <!-- Slider 2 -->
- <div class="owl-carousel" id="slider2">
-  <div class="item"><img src="{% static 'app/images/product/12.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 1</span><br><span class="fs-5">Rs. 500</span></div>
-  <div class="item"><img src="{% static 'app/images/product/11.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 2</span><br><span class="fs-5">Rs. 300</span></div>
-  <div class="item"><img src="{% static 'app/images/product/10.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 3</span><br><span class="fs-5">Rs. 100</span></div>
-  <div class="item"><img src="{% static 'app/images/product/9.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 4</span><br><span class="fs-5">Rs. 700</span></div>
-  <div class="item"><img src="{% static 'app/images/product/8.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 5</span><br><span class="fs-5">Rs. 500</span></div>
-  <div class="item"><img src="{% static 'app/images/product/11.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 6</span><br><span class="fs-5">Rs. 400</span></div>
-  <div class="item"><img src="{% static 'app/images/product/5.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 7</span><br><span class="fs-5">Rs. 500</span></div>
-  <div class="item"><img src="{% static 'app/images/product/11.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 8</span><br><span class="fs-5">Rs. 300</span></div>
-  <div class="item"><img src="{% static 'app/images/product/12.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 9</span><br><span class="fs-5">Rs. 600</span></div>
-  <div class="item"><img src="{% static 'app/images/product/7.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 10</span><br><span class="fs-5">Rs. 900</span></div>
-  <div class="item"><img src="{% static 'app/images/product/6.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 11</span><br><span class="fs-5">Rs. 100</span></div>
-  <div class="item"><img src="{% static 'app/images/product/10.jpg' %}" alt="" height="200px"><span class="fw-bold">Product 12</span><br><span class="fs-5">Rs. 200</span></div>
+<div class="m-3">
+  <h2>BottomWears</h2>
+  <!-- Slider 2 -->
+ 
+  <div class="owl-carousel" id="slider1">
+   {%for b in BottomWear %}
+   <a href="{% url 'product-detail' b.id %}" class="btn"><div class="item"><img src="{{b.product_image.url}}" alt="" height="350px"><span class="fw-bold">{{b.title}}</span><br><span class="fs-5">{{b.selling_price}}</span></div></a>
+   {% endfor %}
+  </div>
  </div>
-</div>
 <!-- End 2nd Product Slider -->
+
+<!-- 3rd Product Slider -->
+
+<div class="m-3">
+  <h2>Mobiles</h2>
+  <!-- Slider 3 -->
+ 
+  <div class="owl-carousel" id="slider1">
+   {%for m in Mobile %}
+   <a href="{% url 'product-detail' m.id %}" class="btn"><div class="item"><img src="{{m.product_image.url}}" alt="" height="350px"><span class="fw-bold">{{m.title}}</span><br><span class="fs-5">{{m.selling_price}}</span></div></a>
+   {% endfor %}
+  </div>
+ </div>
+
+
+<!-- End 3rd Product Slider -->
+
+
+<!-- 4th Product Slider -->
+
+
+<div class="m-3">
+  <h2>Laptops</h2>
+  <!-- Slider 4 -->
+ 
+  <div class="owl-carousel" id="slider1">
+   {%for l in Laptop %}
+   <a href="{% url 'product-detail' l.id %}" class="btn"><div class="item"><img src="{{l.product_image.url}}" alt="" height="350px"><span class="fw-bold">{{l.title}}</span><br><span class="fs-5">{{l.selling_price}}</span></div></a>
+   {% endfor %}
+  </div>
+ </div>
+
+<!-- End 4th Product Slider -->
+
+
+
+
 {% endblock main-content %}
 
