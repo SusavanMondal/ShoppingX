@@ -47,8 +47,58 @@ def orders(request):
 def change_password(request):
  return render(request, 'app/changepassword.html')
 
-def mobile(request):
- return render(request, 'app/mobile.html')
+def mobile(request, data=None):
+    mobiles = None  # Initialize mobiles to None
+    
+    if data is None:
+        mobiles = Product.objects.filter(catagory='M')
+    elif data.lower() in ['redmi', 'xiaomi']:
+        mobiles = Product.objects.filter(catagory='M', brand=data)
+    elif data.lower() in ['samsung', 'galaxy']:
+        mobiles = Product.objects.filter(catagory='M', brand=data)
+    elif data.lower()=="realme":
+        mobiles = Product.objects.filter(catagory='M', brand=data)
+    elif data.lower()=="vivo":
+        mobiles = Product.objects.filter(catagory='M', brand=data)
+    elif data.lower()=="infinix":
+        mobiles = Product.objects.filter(catagory='M', brand=data)
+    elif data=='below':
+        mobiles=Product.objects.filter(catagory='M').filter(discount_price__lt=10000)
+    elif data=='above':
+        mobiles=Product.objects.filter(catagory='M').filter(discount_price__gt=10000)
+    return render(request, 'app/mobile.html', {'mobiles': mobiles})
+def topwear(request, data=None):
+    topwears = None  # Initialize mobiles to None
+    if data is None:
+        topwears = Product.objects.filter(catagory='TW')
+    elif data=='puma':
+        topwears = Product.objects.filter(catagory='TW', brand=data)
+    elif data=='nike':
+        topwears = Product.objects.filter(catagory='TW', brand=data)
+    elif data=='below':
+        topwears=Product.objects.filter(catagory='TW').filter(discount_price__lt=10000)
+    elif data=='above':
+        topwears=Product.objects.filter(catagory='TW').filter(discount_price__gt=10000)
+    return render(request,'app/topwear.html', {'topwears': topwears})
+def laptop(request, data=None):
+    laptops = None  # Initialize mobiles to None
+    
+    if data is None:
+        laptops = Product.objects.filter(catagory='L')
+    elif data.lower()=='lenovo':
+        laptops = Product.objects.filter(catagory='L', brand=data)
+    elif data.lower()=='asus':
+        laptops = Product.objects.filter(catagory='L', brand=data)
+    elif data.lower()=="samsung":
+        laptops = Product.objects.filter(catagory='L', brand=data)
+    elif data.lower()=="hp":
+        laptops = Product.objects.filter(catagory='L', brand=data)
+    elif data=='below':
+        laptops=Product.objects.filter(catagory='L').filter(discount_price__lt=10000)
+    elif data=='above':
+        laptops=Product.objects.filter(catagory='L').filter(discount_price__gt=10000)
+    return render(request, 'app/laptop.html', {'laptop': laptops})
+
 
 def login(request):
  return render(request, 'app/login.html')
