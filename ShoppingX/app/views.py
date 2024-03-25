@@ -80,6 +80,21 @@ def topwear(request, data=None):
     elif data=='above':
         topwears=Product.objects.filter(catagory='TW').filter(discount_price__gt=10000)
     return render(request,'app/topwear.html', {'topwears': topwears})
+
+def bottomwear(request, data=None):
+    bottomwears = None  # Initialize mobiles to None
+    if data is None:
+        bottomwears = Product.objects.filter(catagory='BW')
+    elif data=='puma':
+        bottomwears = Product.objects.filter(catagory='BW', brand=data)
+    elif data=='nike':
+        bottomwears = Product.objects.filter(catagory='BW', brand=data)
+    elif data=='below':
+        bottomwears=Product.objects.filter(catagory='BW').filter(discount_price__lt=10000)
+    elif data=='above':
+        bottomwears=Product.objects.filter(catagory='BW').filter(discount_price__gt=10000)
+    return render(request,'app/bottomwear.html', {'bottomwears': bottomwears})
+
 def laptop(request, data=None):
     laptops = None  # Initialize mobiles to None
     
