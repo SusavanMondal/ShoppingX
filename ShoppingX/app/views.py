@@ -1,6 +1,12 @@
 from django.shortcuts import render
 from django.views import View
 from .models import *
+from .forms import CustomRegistrationFrom
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, redirect
+
+
 # def home(request):
 #  return render(request, 'app/home.html')
 
@@ -115,11 +121,28 @@ def laptop(request, data=None):
     return render(request, 'app/laptop.html', {'laptop': laptops})
 
 
-def login(request):
- return render(request, 'app/login.html')
+# def login(request):
+#  return render(request, 'app/login.html')
 
-def customerregistration(request):
- return render(request, 'app/customerregistration.html')
 
+
+# def customerregistration(request):
+#  return render(request, 'app/customerregistration.html')
+class CustomerRegistrationView(View):
+   def get(self,request):
+      form=CustomRegistrationFrom()
+      return render(request,'app/customerregistration.html' , context={'form':form})
+   def post(self,request):
+      form=CustomRegistrationFrom(request.POST)
+      if form.is_valid():
+         messages.success(request, 'Successfully Registered!')
+         form.save()
+      return render(request,'app/customerregistration.html' , context={'form':form})
+
+
+def authlogout(request):
+    logout(request)
+    messages.success(request, "Successfully logged out")
+    return redirect('login')
 def checkout(request):
  return render(request, 'app/checkout.html')
