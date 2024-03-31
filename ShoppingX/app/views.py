@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.views import View
 from .models import *
-from .forms import CustomRegistrationFrom
+from .forms import CustomRegistrationFrom, CustomerProfileForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
+
 
 
 # def home(request):
@@ -41,11 +42,37 @@ def add_to_cart(request):
 def buy_now(request):
  return render(request, 'app/buynow.html')
 
-def profile(request):
- return render(request, 'app/profile.html')
+# def profile(request):
+#  return render(request, 'app/profile.html')
+class ProfileView(View):
+ def get(self, request):
+    form=CustomerProfileForm()
+    return render(request,'app/profile.html', context={'form':form, 'active':'btn-primary'})
+ def post(self, request):
+    form=CustomerProfileForm(request.POST)
+    if form.is_valid():
+       usr=request.user
+       name=form.cleaned_data['name']
+       locality=form.cleaned_data['locality']
+       city=form.cleaned_data['city']
+       state=form.cleaned_data['state']
+       zip_code=form.cleaned_data['zip_code']
+       reg=Customer(user=usr, name=name, locality=locality, city=city, state=state, zip_code=zip_code)
+       reg.save()
+       messages.success(request, ' Profile Updated Successfully!!')
+    return render(request, 'app/profile.html', {'form': form, 'active':'btn-primary'})
+ 
+
+
+
+
 
 def address(request):
- return render(request, 'app/address.html')
+ add=Customer.objects.filter(user=request.user)
+ 
+
+ return render(request, 'app/address.html', context={'add': add, 'active':'btn-primary'})
+
 
 def orders(request):
  return render(request, 'app/orders.html')

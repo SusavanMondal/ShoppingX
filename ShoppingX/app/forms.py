@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm,UsernameField,PasswordChangeForm, PasswordResetForm, SetPasswordForm
 from django.utils.translation import gettext, gettext_lazy as _
 from django.contrib.auth import password_validation
+from .models import Customer
 
 class CustomRegistrationFrom(UserCreationForm):
     password1=forms.CharField(label="Password", widget=forms.PasswordInput(attrs={'class':'form-control'}))
@@ -58,3 +59,17 @@ class MySetPassword(SetPasswordForm):
         strip=False,
         widget=forms.PasswordInput(attrs={'class': 'form-control'})
     )
+
+
+
+class CustomerProfileForm(forms.ModelForm):
+    class Meta:
+        model=Customer
+        fields=['name','locality','city', 'state', 'zip_code']
+        widgets={
+            'name':forms.TextInput(attrs={'class':'form-control'}),
+            'locality':forms.TextInput(attrs={'class':'form-control'}),
+            'city':forms.TextInput(attrs={'class':'form-control'}),
+            'state':forms.Select(attrs={'class':'form-control'}),
+            'zip_code':forms.NumberInput(attrs={'class':'form-control'}),
+        }
