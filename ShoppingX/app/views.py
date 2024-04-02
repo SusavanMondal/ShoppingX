@@ -37,7 +37,19 @@ class ProductDetails(View):
 
 
 def add_to_cart(request):
- return render(request, 'app/addtocart.html')
+ user=request.user
+ product_id=request.GET.get('prod_id')
+ product=Product.objects.get(id=product_id)
+ Cart(user=user, product=product).save()
+ return redirect('showcart')
+def show_cart(request):
+    if request.user.is_authenticated:
+        user = request.user
+        carts = Cart.objects.filter(user=user)
+        # print(carts.Product.items)
+        return render(request, 'app/addtocart.html', {'carts': carts})
+    else:
+        return redirect('login')
 
 def buy_now(request):
  return render(request, 'app/buynow.html')
