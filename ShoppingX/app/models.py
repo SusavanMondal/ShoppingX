@@ -84,6 +84,10 @@ class Cart(models.Model):
 
     def __str__(self) -> str:
         return str(self.id)
+    @property
+    def total_csot(self):
+        return self.quantity*self.product.discount_price
+    
 
 STATUS_CHOICES=(
     ('Accepted', 'Accepted'),
@@ -99,6 +103,13 @@ class OrderPlace(models.Model):
     quantity=models.PositiveIntegerField(default=1)
     order_date=models.DateTimeField(auto_now_add=True)
     status=models.CharField(max_length=50, choices=STATUS_CHOICES, default='Pending')
+
+
+    @property
+    def total_csot(self):
+        return self.quantity*self.product.discount_price
+
+
 
 
 

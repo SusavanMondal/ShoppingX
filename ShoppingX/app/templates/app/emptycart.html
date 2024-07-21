@@ -1,0 +1,14 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}Cart{% endblock title %}
+
+{% block main-content %}
+
+<div class="container">
+    <h1>Your Shopping Cart</h1>
+    <div class="cart-icon">&#128722;</div>
+    <p>Your shopping cart is currently empty.</p>
+    <p><a href='{%url 'home' %}'>Continue Shopping</a></p>
+</div>
+{% endblock main-content %}

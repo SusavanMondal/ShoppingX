@@ -7,10 +7,15 @@ from .forms import LoginForm, MyPasswordResetForm,MySetPassword
 
 urlpatterns = [
     # path('', views.home),
-    path('',views.Productsviews.as_view(), name="home"),
+    path('',views.Productsviews.as_view(), name='home'),
     path('product-detail/<int:pk>', views.ProductDetails.as_view(), name='product-detail'),
     path('add-to-cart/', views.add_to_cart, name='add-to-cart'),
     path('cart/', views.show_cart, name='showcart'),
+    path('pluscart/', views.pluscart),
+    path('minuscart/', views.minuscart),
+    path('minuscart/', views.minuscart),
+    path('removeitem/', views.remove_cart),
+
     path('buy/', views.buy_now, name='buy-now'),
     path('profile/', views.ProfileView.as_view(), name='profile'),
     path('address/', views.address, name='address'),
@@ -29,6 +34,7 @@ urlpatterns = [
     # path('registration/', views.customerregistration, name='customerregistration'),
     path('registration/', views.CustomerRegistrationView.as_view(), name='customerregistration'),#customerRegistration
     path('checkout/', views.checkout, name='checkout'),
+    path('paymentdone/', views.payment_done, name='paymentdone'),
     path('logout/',views.authlogout, name='logout'),
     path('changepassword/', auth_views.PasswordChangeView.as_view(template_name='app/changepassword.html', success_url='/passwordchangedone/'), name='changepassword'),
     path('passwordchangedone/', auth_views.PasswordChangeDoneView.as_view(template_name="app/passwordchangedone.html"), name='passwordchangedone'),
